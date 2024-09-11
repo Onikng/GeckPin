@@ -17,6 +17,10 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
+  Onbtnreturn(){
+    this.router.navigate(['/splash'])
+    }
+
   onLoginButtonPressed(){
     if(this.sessionManager.performLogin(this.user, this.password)){
       this.router.navigate(['/home'])
