@@ -1,22 +1,112 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+/>
+<ion-content [fullscreen]="true" class="home">
   
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      
+      <div class="toolbar-content">
+        <div class="back-button">
+        <a href="" (click)="Onbtnreturn()">
+          <img src="/assets/images/flecha-izquierda.png" alt="botonderetroceso">
+        </a>
+      </div>
+        <ion-searchbar placeholder="Buscar" class="search-bar"></ion-searchbar>
+        
+        <div class="logohome">
+          <img src="/assets/images/GECKPIN-removebg-preview.png" alt="logosplash" class="logo">
+        </div>
+        <div class="user">
+          <p>Bienvenido, {{ user }}</p>
+        </div>
+      </div>
+     
     </ion-toolbar>
+    
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="etiquetas">
+    <p class="titulo-etiquetas">Tus etiquetas</p>
+    <div class="carousel-container">
+      <div class="carousel-wrapper">
+        <div class="card">
+          <p>Animales</p>
+        </div>
+        <div class="card">
+          <p>Arte IA</p>
+        </div>
+        <div class="card">
+          <p>Comida</p>
+        </div>
+        <div class="card">
+          <p>UX/UI</p>
+        </div>
+        <div class="card">
+          <p>Instagram Stories</p>
+        </div>
+        <!-- Añade más cards según sea necesario -->
+      </div>
+    </div>
+  </div>
+
+  <div class="cards-container-pin">
+    <div class="cardpin" (click)="OnCardPinClick()">
+      <img src="/assets/images/tattoo-ideas.jpg" alt="Imagen 1">
+      <p>Tattoo Ideas</p>
+    </div>
+    <div class="cardpin" (click)="OnCardPinClick()">
+      <img src="/assets/images/AI-Art.jpg" alt="Imagen 2">
+      <p>AI Art Library</p>
+    </div>
+    <div class="cardpin" (click)="OnCardPinClick()">
+      <img src="/assets/images/food.jpg" alt="Imagen 3">
+      <p>Delicious Filette</p>
+    </div>
+    <div class="cardpin" (click)="OnCardPinClick()">
+      <img src="/assets/images/uxdesign.jpg" alt="Imagen 4">
+      <p>UX/UI Ideas for you</p>
+    </div>
+    <div class="cardpin" (click)="OnCardPinClick()">
+      <img src="/assets/images/Pallette.jpg" alt="Imagen 4">
+      <p>Colo Pallette for Proyects</p>
+    </div>
+    <div class="cardpin" (click)="OnCardPinClick()">
+      <img src="/assets/images/outfit.jpg" alt="Imagen 4">
+      <p>Outfit Idea For Men</p>
+    </div>
+    <div class="cardpin" (click)="OnCardPinClick()">
+      <img src="/assets/images/aiart2.jpg" alt="Imagen 4">
+      <p>AI Art Asian Girl </p>
+    </div>
+    <!-- Añade más cards según sea necesario -->
   </div>
 
 </ion-content>
+
+<ion-footer>
+  <ion-tab-bar slot="bottom" >
+    <ion-tab-button tab="home" (click)="OnHomeClick()">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label>Inicio</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="addfile" (click)="OnAddFileClick()">
+      <ion-icon name="add-circle-outline"></ion-icon>
+      <ion-label>Añadir</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="library" (click)="OnLibraryClick()">
+      <ion-icon name="library-outline"></ion-icon>
+      <ion-label>Biblioteca</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile" (click)="OnProfileClick()">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>Perfil</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-footer>
+
+  

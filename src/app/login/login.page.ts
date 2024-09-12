@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Route, Router} from '@angular/router';
 import { SessionManager } from 'src/managers/SessionManager';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -23,7 +24,7 @@ export class LoginPage implements OnInit {
 
   onLoginButtonPressed(){
     if(this.sessionManager.performLogin(this.user, this.password)){
-      this.router.navigate(['/home'])
+      this.router.navigate(['/home'], {queryParams:{user: this.user}})
     }else{
       this.user=''
       this.password=''

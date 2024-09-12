@@ -1,27 +1,158 @@
-#container {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-  position: absolute;
+*{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+ion-content {
+  --background: none; 
+}
+ion-toolbar {
+  --padding-start: 0; 
+  --padding-end: 0;
+  background: #285943;
+  
+}
+.toolbar-content {
+  display: flex;
+  background: #285943;
+  padding-left: 30px;
+  height: 90px;
+}
+
+.back-button{
+  max-width: 20px;
+  align-self: flex-start;
+}
+
+ion-searchbar{
+  max-width: 250px;
+  align-items: center;
+  
+}
+
+ion-toolbar img{
+  width: 60px;
+  align-items: center;
+  height: auto;
+}
+.user {
+  position: absolute; /* Posiciona el div `user` de manera absoluta dentro del `toolbar-content` */
+  bottom: 0; /* Alinea el `user` en la parte inferior del contenedor */
   left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 50px;
+  width: 100%; /* Asegura que el `user` ocupe todo el ancho del contenedor */
+  background: transparent; /* Mismo fondo que el contenedor para unificar el diseño */
+  color: white; /* Color del texto */
+  text-align: center; /* Centra el texto */
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.home{
+  background-image: url('/assets/images/fondo-home.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+ion-tab-bar{
+  --border:none;
+  --background:none;
+  background: linear-gradient(135deg, #285943, #56BF90);
+  --color: #000000;
+}
 
-  color: #8c8c8c;
+.card-slider {
+  padding: 10px 0; /* Espacio opcional alrededor del carrusel */
+}
 
+.card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 8px 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px; /* Ajusta según el tamaño que desees */
+  max-width: 150px;
+  height: 40px;
+  font-size: 14px;
+  color: #285943; /* Color del texto */
+  text-align: center;
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
+.titulo-etiquetas{
+  font-size: smaller;
+  color: #285943;
+}
+
+.carousel-container {
+  overflow-x: auto; /* Permite el desplazamiento horizontal */
+  white-space: nowrap; /* Alinea las cards horizontalmente */
+  padding:-1px 0; /* Espaciado superior e inferior */
+}
+
+.carousel-wrapper {
+  display: inline-flex; /* Alinea las cards horizontalmente */
+  gap: 10px; /* Espacio entre las cards */
+}
+
+/* Estilo para cada card */
+.card {
+  background: linear-gradient(135deg, #285943, #56BF90);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px; /* Ajusta el ancho mínimo */
+  max-width: 120px; /* Ajusta el ancho máximo */
+  height: 10px;
+  font-size: 10px;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  flex-shrink: 0; /* Evita que las cards se reduzcan */
+}
+
+.cards-container-pin {
+  display: flex;
+  flex-wrap: wrap; /* Permite que las cards se envuelvan en varias filas */
+  gap: 10px; /* Espacio entre las cards */
+  padding: 10px; /* Espaciado alrededor del contenedor */
+}
+
+/* Estilo para cada card */
+.cardpin {
+  background-color: transparent;
+  border-radius: 10px;
+  
+  width: calc(50% - 10px); /* Dos cards por fila con espacio entre ellas */
+  /* Ajusta el ancho menos el espacio entre las cards */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.cardpin img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px 10px 0 0;
+}
+
+.cardpin p {
+  padding: 10px;
+  font-size: 14px;
+  color: #285943;
   margin: 0;
 }
 
-#container a {
-  text-decoration: none;
-}

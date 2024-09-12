@@ -29,17 +29,22 @@ const routes: Routes = [
     loadChildren: () => import('./detail/detail.module').then( m => m.DetailPageModule)
   },
   {
-    path: 'addfile',
-    loadChildren: () => import('./addfile/addfile.module').then( m => m.AddfilePageModule)
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
-    path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+    path: 'addfile',
+    loadChildren: () => import('./addfile/addfile.module').then(m => m.AddfilePageModule)
   },
   {
     path: 'library',
-    loadChildren: () => import('./library/library.module').then( m => m.LibraryPageModule)
+    loadChildren: () => import('./library/library.module').then(m => m.LibraryPageModule)
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
+  }
+  
 ];
 
 @NgModule({
