@@ -25,3 +25,27 @@ ion-content {
     text-align: center;
     font-size: 30px;
 }
+
+ion-toolbar {
+    --padding-start: 0; 
+    --padding-end: 0;
+    background: #285943;
+
+}
+  .toolbar-content {
+    display: flex;
+    background: #285943;
+    padding-left: 30px;
+    height: 90px;
+}
+  
+.back-button{
+    max-width: 20px;
+    align-self: flex-start;
+}
+
+ion-toolbar img{
+    width: 60px;
+    align-items: center;
+    height: auto;
+}

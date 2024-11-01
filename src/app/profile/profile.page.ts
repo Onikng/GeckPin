@@ -13,6 +13,6 @@ export class ProfilePage implements OnInit {
   }
 
   Onbtnreturn(){
-    this.router.navigate(['/splash'])
+    this.router.navigate(['/home'])
     }
 }

@@ -1,6 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import {Route, Router} from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { StorageService } from 'src/managers/StorageService';
 
 
 
@@ -12,14 +13,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomePage implements OnInit{
 
-  constructor(private router:Router, private route: ActivatedRoute) {}
+  constructor(private router:Router, private route: ActivatedRoute, private storageService: StorageService) {}
 
   user: string='';
 
-ngOnInit(){
-  this.route.queryParams.subscribe(params => {
-    this.user = params['user'] || null;
-  })}
+async ngOnInit(){
+  this.user = await this.storageService.get('user');
+    if (!this.user) {
+      // Redirigir a la página de login si no hay sesión activa
+      this.router.navigate(['/login']);
+    }
+}
 
   Onbtnreturn(){
     this.router.navigate(['/login'])
