@@ -15,15 +15,18 @@ export class HomePage implements OnInit{
 
   constructor(private router:Router, private route: ActivatedRoute, private storageService: StorageService) {}
 
-  user: string='';
+  user: any;
 
-async ngOnInit(){
-  this.user = await this.storageService.get('user');
+async ngOnInit(){}
+  
+
+async ionViewDidEnter() {
+    this.user = await this.storageService.get('user');
     if (!this.user) {
-      // Redirigir a la página de login si no hay sesión activa
-      this.router.navigate(['/login']);
+      console.log('No se encontraron datos del usuario.');
     }
-}
+  }
+
 
   Onbtnreturn(){
     this.router.navigate(['/login'])

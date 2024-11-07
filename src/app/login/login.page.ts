@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Route, Router} from '@angular/router';
-import { SessionManager } from 'src/managers/SessionManager';
+import { Router } from '@angular/router';
+import { UserLoginUseCase } from '../use-cases/user-login.use-case';
+import { CancelAlertService } from 'src/managers/CancelAlertService';
+
 //Importación StorageService
 import { StorageService } from 'src/managers/StorageService';
 
@@ -12,9 +14,9 @@ import { StorageService } from 'src/managers/StorageService';
 })
 export class LoginPage implements OnInit {
 //Creación Instanacia StorageService
-  constructor(private router: Router, private sessionManager: SessionManager, private storageService: StorageService) { }
+  constructor(private router: Router, private storageService: StorageService,private userLoginUseCase: UserLoginUseCase, private alert: CancelAlertService) { }
 
-  user: string = '';
+  email: string = '';
   password: string= '';
 
   ngOnInit() {
@@ -24,18 +26,27 @@ export class LoginPage implements OnInit {
     this.router.navigate(['/splash'])
     }
 
-  async onLoginButtonPressed(){
-    if(this.sessionManager.performLogin(this.user, this.password)){
-      //Implementación StorageService
-      await this.storageService.set('isSessionActive', true);
-      await this.storageService.set('user', this.user);
-      this.router.navigate(['/home'], {queryParams:{user: this.user}})
-    }else{
-      this.user=''
-      this.password=''
-      alert('Las credenciales ingresadas son inválidas.')
+    async onLoginButtonPressed() {
+      const result = await this.userLoginUseCase.performLogin(this.email, this.password);
+  
+      if (result.success) {
+        this.alert.showAlert(
+          'Login exitoso',
+          'Has iniciado sesión correctamente.',
+          () => {
+            this.router.navigate(['/home']); // Navegar a inicio cuando el login sea exitoso
+          }
+        );
+      } else {
+        this.alert.showAlert(
+          'Error',
+          result.message,
+          () => {
+            this.router.navigate(['/splash']); 
+          }
+        );
+      }
     }
-  }
 
   onRegisterLinkPressed(){
     this.router.navigate(['/register'])
