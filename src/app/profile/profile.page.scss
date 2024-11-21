@@ -10,7 +10,7 @@ ion-content {
 }
 
 .profile{
-    background-image: url('/assets/images/fondo-register.png');
+    background-image: url('/assets/images/fondoperfil.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -21,31 +21,72 @@ ion-content {
     align-items: center;
 }
 
-.tituloprofile{
-    text-align: center;
-    font-size: 30px;
-}
 
 ion-toolbar {
     --padding-start: 0; 
     --padding-end: 0;
-    background: #285943;
+    --background: #285943;
 
 }
   .toolbar-content {
     display: flex;
     background: #285943;
-    padding-left: 30px;
     height: 90px;
 }
-  
+
 .back-button{
-    max-width: 20px;
+    max-width: 40px;
     align-self: flex-start;
 }
 
-ion-toolbar img{
-    width: 60px;
+.logohome{
+    width: 95px;
     align-items: center;
     height: auto;
+    margin-left: 95px;
 }
+
+
+.logo-avatar {
+    size: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: space-between;
+    margin-top: 10px;
+}
+
+
+.profile-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+ion-item {
+    --background: transparent; 
+    --border-color: transparent; 
+    --color:black;
+    background-color: transparent !important; // CSS estándar /
+    box-shadow: none !important; // Eliminamos sombras /
+    margin-bottom: 25px;
+
+}
+
+ion-list{
+    --background-color:transparent;
+    --ion-background-color: transparent;
+
+    background-color: transparent !important; // CSS estándar /
+    box-shadow: none !important; // Eliminamos sombras /
+
+}
+//footer
+ion-tab-bar{
+    --border:none;
+    --background:none;
+    background: linear-gradient(135deg, #285943, #56BF90);
+    --color: #000000;
+  }
