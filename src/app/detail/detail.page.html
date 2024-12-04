@@ -1,8 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+      <div class="toolbar-content">
+          <div class="back-button">
+              <a href="" (click)="Onbtnreturn()">
+              <img src="/assets/images/flecha-izquierda.png" alt="botonderetroceso">
+              </a>
+          </div>
+
+          <div class="logohome">
+              <img src="/assets/images/GECKPIN-removebg-preview.png" alt="logosplash" class="logo">
+          </div>
+      </div>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true" class="detail">
-  <div class="retroceso">
-    <a href="/home" (click)="Onbtnreturn()"><img src="/assets/images/flecha-izquierda.png" alt="botonderetroceso"></a>
+
+  <!-- Contenedor para imagen o video -->
+  <div class="media-container">
+    <img *ngIf="selectedItem?.type === 'image'" [src]="selectedItem?.media" alt="Selected Image">
+    <video *ngIf="selectedItem?.type === 'video'" controls>
+      <source [src]="selectedItem?.media" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
   </div>
-  <div class="titulodetail">
-    <p>PROXIMAMENTE MÓDULO DETAIL</p>
+
+  <!-- Título -->
+  <h1 class="title">{{ selectedItem?.title }}</h1>
+
+  <!-- Contenedor para la información del usuario -->
+  <div class="user-container">
+    <img [src]="selectedItem?.user?.avatar" alt="Avatar del usuario" class="user-avatar">
+    <div class="user-info">
+      <p class="username">{{ selectedItem?.user?.name }}</p>
+      <p class="description">{{ selectedItem?.description }}</p>
     </div>
+    <ion-icon name="person-add-outline" class="add-friend-icon"></ion-icon>
+  </div>
+
+  <!-- Botones -->
+  <div class="actions">
+    <button ion-button class="action-button" (click)="viewFeed()">Ver Feed</button>
+    <button ion-button class="action-button" (click)="saveItem()">Guardar</button>
+    <ion-icon name="share-outline" class="share-icon" (click)="shareItem()"></ion-icon>
+  </div>
+
+  <!-- Botón adicional -->
+  <div class="additional-action">
+    <button ion-button class="suggest-button" (click)="suggestMore()">Te Podría Interesar</button>
+  </div>
+
+  <ion-footer>
+    <ion-tab-bar slot="bottom" >
+      <ion-tab-button tab="home" (click)="OnHomeClick()">
+        <ion-icon name="home-outline"></ion-icon>
+        <ion-label>Inicio</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="addfile" (click)="OnAddFileClick()">
+        <ion-icon name="add-circle-outline"></ion-icon>
+        <ion-label>Añadir</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="library" (click)="OnLibraryClick()">
+        <ion-icon name="library-outline"></ion-icon>
+        <ion-label>Biblioteca</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="profile" (click)="OnProfileClick()">
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-footer>
+  
+    
+
 </ion-content>

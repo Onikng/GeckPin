@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+      <div class="toolbar-content">
+          <div class="back-button">
+              <a href="" (click)="Onbtnreturn()">
+              <img src="/assets/images/flecha-izquierda.png" alt="botonderetroceso">
+              </a>
+          </div>
+
+          <div class="logohome">
+              <img src="/assets/images/GECKPIN-removebg-preview.png" alt="logosplash" class="logo">
+          </div>
+      </div>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" class="adminprofile">
+  <ion-grid>
+    <!-- Contenedor centrado para el logo -->
+    <ion-row class="ion-justify-content-center ion-margin-top">
+      <ion-avatar class="logo-avatar">
+        <img src="/assets/images/userblack.jpg" alt="Foto usuario">
+      </ion-avatar>
+    </ion-row>
+
+    <!-- Nombre del usuario centrado -->
+    <ion-row class="ion-justify-content-center">
+      <ion-label class="profile-name">Oniking</ion-label>
+    </ion-row>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Cerrar Sesión</ion-label>
+        <ion-icon slot="end" name="log-out-outline"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label>Eliminar cuenta</ion-label>
+        <ion-icon slot="end" name="trash-outline"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-grid>
+</ion-content>
+
+
+
+

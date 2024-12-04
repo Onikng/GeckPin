@@ -1,8 +1,74 @@
+<ion-header>
+  <ion-toolbar>
+      <div class="toolbar-content">
+          <div class="back-button">
+              <a href="" (click)="Onbtnreturn()">
+              <img src="/assets/images/flecha-izquierda.png" alt="botonderetroceso">
+              </a>
+          </div>
+
+          <div class="logohome">
+              <img src="/assets/images/GECKPIN-removebg-preview.png" alt="logosplash" class="logo">
+          </div>
+      </div>
+  </ion-toolbar>
+</ion-header>
+
+
+<!-- Logo imagen subir archivo -->
 <ion-content [fullscreen]="true" class="addfile">
-  <div class="retroceso">
-    <a href="/home" (click)="Onbtnreturn()"><img src="/assets/images/flecha-izquierda.png" alt="botonderetroceso"></a>
+  <div class="content-wrapper">
+  <div class="logo-add">
+    <img src="/assets/images/addfile.png" alt="Foto usuario">
   </div>
-  <div class="tituloaddfile">
-    <p>PROXIMAMENTE MÓDULO ADDFILE</p>
-    </div>
+</div>
+
+<!-- Botón subir pin-->
+<ion-content class="add-file-content">
+  <div class="upload-section">
+    <ion-button expand="block" class="upload-button">
+        Subir Pin
+    </ion-button>
+</div>
+
+<!-- Descripción -->
+<div class="description-container">
+  <ion-textarea
+    placeholder="*añade una descripción a tu pin(opcional)"
+    rows="6"
+    class="description-textarea"
+  ></ion-textarea>
+</div>
+
+<!-- Botón publicar -->
+<div class="publish-section">
+  <ion-button expand="block" class="publish-button">
+    Publicar
+  </ion-button>
+</div>
+
+  <ion-footer>
+    <ion-tab-bar slot="bottom" >
+      <ion-tab-button tab="home" (click)="OnHomeClick()">
+        <ion-icon name="home-outline"></ion-icon>
+        <ion-label>Inicio</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="addfile" (click)="OnAddFileClick()">
+        <ion-icon name="add-circle-outline"></ion-icon>
+        <ion-label>Añadir</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="library" (click)="OnLibraryClick()">
+        <ion-icon name="library-outline"></ion-icon>
+        <ion-label>Biblioteca</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="profile" (click)="OnProfileClick()">
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-footer>
+
 </ion-content>

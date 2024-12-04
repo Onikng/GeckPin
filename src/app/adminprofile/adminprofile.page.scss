@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+ion-content {
+  --background: none; 
+}
+
+.adminprofile{
+    background-image: url('/assets/images/fondoperfil.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+ion-toolbar {
+    --padding-start: 0; 
+    --padding-end: 0;
+    --background: #285943;
+
+}
+
+.toolbar-content {
+    display: flex;
+    background: #285943;
+    height: 90px;
+}
+  
+.back-button{
+    max-width: 40px;
+    align-self: flex-start;
+}
+
+.logohome{
+    width: 95px;
+    align-items: center;
+    height: auto;
+    margin-left: 95px;
+}
+
+/* Estilo del avatar del logo */
+.logo-avatar {
+    size: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: space-between;
+    margin-top: 10px;
+}
+
+/* Estilo del nombre del perfil */
+.profile-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-top: 10px;
+}
+
+ion-item {
+    margin: 10px 20px;
+  --background: none !important; /* Forzar eliminación del fondo */
+  --ion-background-color: transparent !important; /* También para temas oscuros */
+  color: white; /* Color del texto */
+  border-radius: 10px; /* Opcional: bordes redondeados */
+  box-shadow: none !important; /* Elimina cualquier sombra */
+  background: none !important; /* Forzar eliminación de fondo */
+}
+
+
+  ion-icon {
+    color: #285943;
+    --background:none !important;
+    box-shadow: none !important; /* Elimina cualquier sombra */
+    background: none !important; /* Forzar eliminación de fondo */
+  }

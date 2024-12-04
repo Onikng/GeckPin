@@ -33,8 +33,10 @@ async ionViewDidEnter() {
     }
 
   
-  OnCardPinClick(){
-    this.router.navigate(['/detail'])
+  OnCardPinClick(selectedItem: any) {
+      this.router.navigate(['/detail'], {
+        queryParams: { data: JSON.stringify(selectedItem) },
+        });
   }
 
   OnHomeClick(){
