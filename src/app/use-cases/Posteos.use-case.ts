@@ -23,6 +23,7 @@ export class PosteosUseCase {
         photoURL: PhotoURL,
         descripcion: descripcion,
         createdAt: new Date().toISOString(), // Timestamp
+        postId: this.firestore.createId()
       };
   
       console.log('Datos que se intentan guardar en Firestore:', postData);

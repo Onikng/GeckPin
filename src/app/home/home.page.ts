@@ -27,9 +27,12 @@ async ngOnInit(){
 loadPosts() {
   this.firestore
     .collection('Posts', (ref) => ref.orderBy('createdAt', 'desc'))
-    .valueChanges()
-    .subscribe((data) => {
-      this.posts = data; // Asigna los datos obtenidos al array `posts`
+    .snapshotChanges()
+    .subscribe((changes) => {
+      this.posts = changes.map((change) => ({
+        id: change.payload.doc.id, // ID del documento
+        ...change.payload.doc.data() as any, // Datos del documento
+      }));
       console.log('Publicaciones cargadas:', this.posts);
     });
 }
@@ -42,8 +45,8 @@ async ionViewDidEnter() {
   }
 
 
-  navigateToDetail(postId: string) {
-    this.router.navigate(['/detail', postId]);
+  navigateToDetail() {
+    this.router.navigate(['/detail']);
   }
 
   OnCardPinClick() {
