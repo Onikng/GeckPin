@@ -1,11 +1,7 @@
 <ion-header>
     <ion-toolbar>
         <div class="toolbar-content">
-            <div class="back-button">
-                <a href="" (click)="Onbtnreturn()">
-                <img src="/assets/images/flecha-izquierda.png" alt="botonderetroceso">
-                </a>
-            </div>
+            
 
             <div class="logohome">
                 <img src="/assets/images/GECKPIN-removebg-preview.png" alt="logosplash" class="logo">
@@ -26,12 +22,12 @@
     
         <!-- Nombre del usuario centrado -->
         <ion-row class="ion-justify-content-center">
-          <ion-label class="profile-name">Oniking</ion-label>
+          <ion-label class="profile-name"> {{user?.nombreusuario}} </ion-label>
         </ion-row>
     
         <!-- Lista de opciones de perfil -->
         <ion-list>
-          <ion-item>
+          <ion-item (click)="OnAdminclick()">
             <ion-label>Administrar cuenta</ion-label>
             <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
           </ion-item>

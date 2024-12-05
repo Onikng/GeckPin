@@ -1,74 +1,68 @@
 <ion-header>
   <ion-toolbar>
-      <div class="toolbar-content">
-          <div class="back-button">
-              <a href="" (click)="Onbtnreturn()">
-              <img src="/assets/images/flecha-izquierda.png" alt="botonderetroceso">
-              </a>
-          </div>
-
-          <div class="logohome">
-              <img src="/assets/images/GECKPIN-removebg-preview.png" alt="logosplash" class="logo">
-          </div>
-      </div>
+    <ion-title>Agregar Publicación</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+<ion-content class="ion-padding">
+  <!-- Formulario para la publicación -->
+  <div class="form-container">
+    <!-- Vista previa de la imagen -->
+    <div class="image-preview">
+      <img *ngIf="PhotoURL" [src]="PhotoURL" alt="Vista previa de la imagen" />
+      <ion-button *ngIf="!PhotoURL" expand="block" (click)="onAddImagePressed()">
+        Agregar Imagen
+      </ion-button>
+    </div>
 
-<!-- Logo imagen subir archivo -->
-<ion-content [fullscreen]="true" class="addfile">
-  <div class="content-wrapper">
-  <div class="logo-add">
-    <img src="/assets/images/addfile.png" alt="Foto usuario">
-  </div>
-</div>
-
-<!-- Botón subir pin-->
-<ion-content class="add-file-content">
-  <div class="upload-section">
-    <ion-button expand="block" class="upload-button">
-        Subir Pin
+    <!-- Botón para cambiar la imagen -->
+    <ion-button *ngIf="PhotoURL" expand="block" color="tertiary" (click)="onAddImagePressed()">
+      Cambiar Imagen
     </ion-button>
-</div>
 
-<!-- Descripción -->
-<div class="description-container">
-  <ion-textarea
-    placeholder="*añade una descripción a tu pin(opcional)"
-    rows="6"
-    class="description-textarea"
-  ></ion-textarea>
-</div>
+    <!-- Input para descripción -->
+    <ion-item>
+      <ion-label position="stacked">Descripción</ion-label>
+      <ion-textarea
+        placeholder="Escribe aquí una descripción..."
+        [(ngModel)]="descripcion"
+      ></ion-textarea>
+    </ion-item>
 
-<!-- Botón publicar -->
-<div class="publish-section">
-  <ion-button expand="block" class="publish-button">
-    Publicar
-  </ion-button>
-</div>
+    <!-- Botón para publicar -->
+    <ion-button expand="block" color="primary" (click)="onAddPostButtonPressed()">
+      Publicar
+    </ion-button>
 
-  <ion-footer>
-    <ion-tab-bar slot="bottom" >
-      <ion-tab-button tab="home" (click)="OnHomeClick()">
-        <ion-icon name="home-outline"></ion-icon>
-        <ion-label>Inicio</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button tab="addfile" (click)="OnAddFileClick()">
-        <ion-icon name="add-circle-outline"></ion-icon>
-        <ion-label>Añadir</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button tab="library" (click)="OnLibraryClick()">
-        <ion-icon name="library-outline"></ion-icon>
-        <ion-label>Biblioteca</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button tab="profile" (click)="OnProfileClick()">
-        <ion-icon name="person-outline"></ion-icon>
-        <ion-label>Perfil</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-footer>
-
+    <!-- Botón para limpiar formulario -->
+    <ion-button expand="block" color="danger" (click)="clean()">
+      Limpiar
+    </ion-button>
+  </div>
 </ion-content>
+<ion-footer>
+  <ion-tab-bar slot="bottom" >
+    <ion-tab-button tab="home" (click)="OnHomeClick()">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label>Inicio</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="addfile" (click)="OnAddFileClick()">
+      <ion-icon name="add-circle-outline"></ion-icon>
+      <ion-label>Añadir</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="library" (click)="OnLibraryClick()">
+      <ion-icon name="library-outline"></ion-icon>
+      <ion-label>Biblioteca</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile" (click)="OnProfileClick()">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>Perfil</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-footer>

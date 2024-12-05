@@ -2,7 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import {Route, Router} from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { StorageService } from 'src/managers/StorageService';
-
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
 
@@ -12,13 +12,27 @@ import { StorageService } from 'src/managers/StorageService';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit{
+  posts: any[] = [];
 
-  constructor(private router:Router, private route: ActivatedRoute, private storageService: StorageService) {}
+  constructor(private router:Router, private firestore: AngularFirestore, private route: ActivatedRoute, private storageService: StorageService) {}
 
   user: any;
 
-async ngOnInit(){}
+async ngOnInit(){
+  this.loadPosts();
+}
   
+
+
+loadPosts() {
+  this.firestore
+    .collection('Posts', (ref) => ref.orderBy('createdAt', 'desc'))
+    .valueChanges()
+    .subscribe((data) => {
+      this.posts = data; // Asigna los datos obtenidos al array `posts`
+      console.log('Publicaciones cargadas:', this.posts);
+    });
+}
 
 async ionViewDidEnter() {
     this.user = await this.storageService.get('user');
@@ -28,15 +42,12 @@ async ionViewDidEnter() {
   }
 
 
-  Onbtnreturn(){
-    this.router.navigate(['/login'])
-    }
+  navigateToDetail(postId: string) {
+    this.router.navigate(['/detail', postId]);
+  }
 
-  
-  OnCardPinClick(selectedItem: any) {
-      this.router.navigate(['/detail'], {
-        queryParams: { data: JSON.stringify(selectedItem) },
-        });
+  OnCardPinClick() {
+      this.router.navigate(['/detail']);
   }
 
   OnHomeClick(){

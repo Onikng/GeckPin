@@ -1,11 +1,7 @@
 <ion-header>
   <ion-toolbar>
       <div class="toolbar-content">
-          <div class="back-button">
-              <a href="" (click)="Onbtnreturn()">
-              <img src="/assets/images/flecha-izquierda.png" alt="botonderetroceso">
-              </a>
-          </div>
+
 
           <div class="logohome">
               <img src="/assets/images/GECKPIN-removebg-preview.png" alt="logosplash" class="logo">
@@ -30,11 +26,11 @@
     </ion-row>
 
     <ion-list>
-      <ion-item>
+      <ion-item (click)="OnLogoutButtonPressed()">
         <ion-label>Cerrar Sesión</ion-label>
         <ion-icon slot="end" name="log-out-outline"></ion-icon>
       </ion-item>
-      <ion-item>
+      <ion-item (click)="onDeleteAccountButtonPressed()">
         <ion-label>Eliminar cuenta</ion-label>
         <ion-icon slot="end" name="trash-outline"></ion-icon>
       </ion-item>
@@ -42,6 +38,28 @@
   </ion-grid>
 </ion-content>
 
+<ion-footer>
+  <ion-tab-bar slot="bottom" >
+    <ion-tab-button tab="home" (click)="OnHomeClick()">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label>Inicio</ion-label>
+    </ion-tab-button>
 
+    <ion-tab-button tab="addfile" (click)="OnAddFileClick()">
+      <ion-icon name="add-circle-outline"></ion-icon>
+      <ion-label>Añadir</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="library" (click)="OnLibraryClick()">
+      <ion-icon name="library-outline"></ion-icon>
+      <ion-label>Biblioteca</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile" (click)="OnProfileClick()">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>Perfil</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-footer>
 
 

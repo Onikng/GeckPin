@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/managers/StorageService';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -7,9 +8,17 @@ import { Router } from '@angular/router';
 })
 export class ProfilePage implements OnInit {
 
-  constructor(private router:Router) { }
+  user:any;
+  constructor(private router:Router, private storageService: StorageService) { }
 
   ngOnInit() {
+  }
+
+  async ionViewDidEnter() {
+    this.user = await this.storageService.get('user');
+    if (!this.user) {
+      console.log('No se encontraron datos del usuario.');
+    }
   }
 
   Onbtnreturn(){
@@ -30,5 +39,9 @@ export class ProfilePage implements OnInit {
 
   OnProfileClick(){
       this.router.navigate(['/profile'])
+  }
+
+  OnAdminclick(){
+    this.router.navigate(['/adminprofile'])
   }
 }

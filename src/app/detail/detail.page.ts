@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.page.html',
@@ -8,15 +10,28 @@ import { Router,ActivatedRoute } from '@angular/router';
 export class DetailPage implements OnInit {
   selectedItem:any;
 
-  constructor(private router:Router, private route: ActivatedRoute) { }
+  constructor(private router:Router, private route: ActivatedRoute, private firestore: AngularFirestore) { }
 
   ngOnInit() {
     // Recoge los datos del elemento seleccionado desde el home
-    this.route.queryParams.subscribe((params) => {
-      if (params && params['data']) {
-        this.selectedItem = JSON.parse(params['data']);
-      }
-    });
+    const postId = this.route.snapshot.paramMap.get('postId');
+    if (postId) {
+      this.loadPost(postId);
+    }
+  }
+
+  loadPost(postId: string) {
+    // Buscar el documento en Firestore usando el `postId`
+    this.firestore
+      .collection('Posts')
+      .doc(postId)
+      .valueChanges()
+      .subscribe((data) => {
+        if (data) {
+          this.selectedItem = data; // Asignar los datos del post
+          console.log('Post cargado:', this.selectedItem);
+        }
+      });
   }
 
   Onbtnreturn(){

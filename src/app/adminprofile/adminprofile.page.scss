@@ -43,7 +43,7 @@ ion-toolbar {
     width: 95px;
     align-items: center;
     height: auto;
-    margin-left: 95px;
+    margin-left: 140px;
 }
 
 /* Estilo del avatar del logo */
@@ -75,9 +75,11 @@ ion-item {
 }
 
 
-  ion-icon {
-    color: #285943;
-    --background:none !important;
-    box-shadow: none !important; /* Elimina cualquier sombra */
-    background: none !important; /* Forzar eliminación de fondo */
+ 
+
+  ion-tab-bar{
+    --border:none;
+    --background:none;
+    background: linear-gradient(135deg, #285943, #56BF90);
+    --color: #000000;
   }

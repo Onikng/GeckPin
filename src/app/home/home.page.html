@@ -9,9 +9,7 @@
       
       <div class="toolbar-content">
         <div class="back-button">
-        <a href="" (click)="Onbtnreturn()">
-          <img src="/assets/images/flecha-izquierda.png" alt="botonderetroceso">
-        </a>
+        
       </div>
         <ion-searchbar placeholder="Buscar" class="search-bar"></ion-searchbar>
         
@@ -51,36 +49,19 @@
     </div>
   </div>
 
-  <div class="cards-container-pin">
-    <div class="cardpin" (click)="OnCardPinClick()">
-      <img src="/assets/images/tattoo-ideas.jpg" alt="Imagen 1">
-      <p>Tattoo Ideas</p>
+  
+  
+  <div class="dynamic-posts-container">
+    <p class="titulo-etiquetas">Publicaciones Recientes</p>
+    <div class="cards-container-pin">
+      <!-- Generar dinámicamente las tarjetas -->
+      <div *ngFor="let post of posts" class="cardpin" (click)="navigateToDetail(post.id)">
+        <!-- Imagen de la publicación -->
+        <img [src]="post.photoURL" alt="Publicación" />
+        <!-- Descripción de la publicación -->
+        <p>{{ post.descripcion }}</p>
+      </div>
     </div>
-    <div class="cardpin" (click)="OnCardPinClick()">
-      <img src="/assets/images/AI-Art.jpg" alt="Imagen 2">
-      <p>AI Art Library</p>
-    </div>
-    <div class="cardpin" (click)="OnCardPinClick()">
-      <img src="/assets/images/food.jpg" alt="Imagen 3">
-      <p>Delicious Filette</p>
-    </div>
-    <div class="cardpin" (click)="OnCardPinClick()">
-      <img src="/assets/images/uxdesign.jpg" alt="Imagen 4">
-      <p>UX/UI Ideas for you</p>
-    </div>
-    <div class="cardpin" (click)="OnCardPinClick()">
-      <img src="/assets/images/Pallette.jpg" alt="Imagen 4">
-      <p>Colo Pallette for Proyects</p>
-    </div>
-    <div class="cardpin" (click)="OnCardPinClick()">
-      <img src="/assets/images/outfit.jpg" alt="Imagen 4">
-      <p>Outfit Idea For Men</p>
-    </div>
-    <div class="cardpin" (click)="OnCardPinClick()">
-      <img src="/assets/images/aiart2.jpg" alt="Imagen 4">
-      <p>AI Art Asian Girl </p>
-    </div>
-    <!-- Añade más cards según sea necesario -->
   </div>
 
 </ion-content>
