@@ -45,8 +45,8 @@ async ionViewDidEnter() {
   }
 
 
-  navigateToDetail() {
-    this.router.navigate(['/detail']);
+  navigateToDetail(postId: string) {
+    this.router.navigate(['/detail', postId]);
   }
 
   OnCardPinClick() {

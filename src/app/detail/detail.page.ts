@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-detail',
@@ -8,13 +9,14 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
   styleUrls: ['./detail.page.scss'],
 })
 export class DetailPage implements OnInit {
-  selectedItem:any;
+  selectedItem:any = {};
 
-  constructor(private router:Router, private route: ActivatedRoute, private firestore: AngularFirestore) { }
+  constructor(private router:Router, private route: ActivatedRoute, private firestore: AngularFirestore, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     // Recoge los datos del elemento seleccionado desde el home
     const postId = this.route.snapshot.paramMap.get('postId');
+    console.log('postId recibido:', postId);
     if (postId) {
       this.loadPost(postId);
     }
@@ -27,9 +29,13 @@ export class DetailPage implements OnInit {
       .doc(postId)
       .valueChanges()
       .subscribe((data) => {
+        console.log('Documento en Firestore:', data);
         if (data) {
           this.selectedItem = data; // Asignar los datos del post
           console.log('Post cargado:', this.selectedItem);
+          this.cdr.detectChanges(); // Forzar la detección de cambios
+        } else {
+          console.log('No se encontró el documento con ID:', postId);
         }
       });
   }

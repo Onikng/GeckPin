@@ -25,12 +25,8 @@ const routes: Routes = [
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: 'detail',
+    path: 'detail/:postId',
     loadChildren: () => import('./detail/detail.module').then( m => m.DetailPageModule)
-  },
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: 'addfile',
@@ -43,7 +39,8 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
-  },  {
+  },
+  {
     path: 'adminprofile',
     loadChildren: () => import('./adminprofile/adminprofile.module').then( m => m.AdminprofilePageModule)
   }

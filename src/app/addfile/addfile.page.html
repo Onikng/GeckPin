@@ -7,16 +7,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <!-- Formulario para la publicación -->
-  <div class="form-container">
-    <!-- Vista previa de la imagen -->
-    <div class="image-preview">
-      <img *ngIf="PhotoURL" [src]="PhotoURL" alt="Vista previa de la imagen" />
-      <ion-button *ngIf="!PhotoURL" expand="block" (click)="onAddImagePressed()">
-        Agregar Imagen
-      </ion-button>
-    </div>
+<ion-content>
+  <!-- Contenedor principal -->
+  <div class="addfile">
+    <!-- Botón para subir imagen -->
+    <ion-button class="upload-button" (click)="onAddImagePressed()">Subir Pin</ion-button>
 
     <!-- Botón para cambiar la imagen -->
     <ion-button *ngIf="PhotoURL" expand="block" color="tertiary" (click)="onAddImagePressed()">

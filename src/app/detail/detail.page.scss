@@ -90,17 +90,21 @@ ion-toolbar {
   
   .user-info {
     flex: 1;
+    
   }
   
   .username {
     font-size: 18px;
     font-weight: bold;
     color: black;
+    
   }
   
   .description {
     font-size: 14px;
     color: black;
+    margin-bottom: 10px;
+    text-align: center;
   }
   
   .add-friend-icon {
@@ -142,7 +146,7 @@ ion-toolbar {
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
-    margin-left: 95px;
+    margin-left: 110px;
   }
 
   ion-tab-bar{
@@ -151,3 +155,10 @@ ion-toolbar {
     background: linear-gradient(135deg, #285943, #56BF90);
     --color: #000000;
   }
+
+  .title {
+    font-size: 20px;
+    color: black;
+  }
+  
+ 

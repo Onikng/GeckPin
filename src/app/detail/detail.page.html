@@ -14,7 +14,7 @@
 
   <!-- Contenedor para imagen o video -->
   <div class="media-container">
-    <img *ngIf="selectedItem?.type === 'image'" [src]="selectedItem?.media" alt="Selected Image">
+    <img *ngIf="selectedItem?.photoURL" [src]="selectedItem.photoURL" alt="Selected Image">
     <video *ngIf="selectedItem?.type === 'video'" controls>
       <source [src]="selectedItem?.media" type="video/mp4">
       Your browser does not support the video tag.
@@ -22,23 +22,22 @@
   </div>
 
   <!-- Título -->
-  <h1 class="title">{{ selectedItem?.title }}</h1>
+  <h1 *ngIf="selectedItem?.title" class="title">{{ selectedItem?.title || 'Sin título disponible' }}</h1>
+
+  
 
   <!-- Contenedor para la información del usuario -->
   <div class="user-container">
-    <img [src]="selectedItem?.user?.avatar" alt="Avatar del usuario" class="user-avatar">
     <div class="user-info">
-      <p class="username">{{ selectedItem?.user?.name }}</p>
-      <p class="description">{{ selectedItem?.description }}</p>
+      <p *ngIf="selectedItem?.user?.name"  class="username">{{ selectedItem?.user.name }}</p>
+      <p *ngIf="selectedItem?.description" class="description">{{ selectedItem?.description || 'Sin descripción disponible' }}</p>
     </div>
-    <ion-icon name="person-add-outline" class="add-friend-icon"></ion-icon>
   </div>
 
   <!-- Botones -->
   <div class="actions">
     <button ion-button class="action-button" (click)="viewFeed()">Ver Feed</button>
     <button ion-button class="action-button" (click)="saveItem()">Guardar</button>
-    <ion-icon name="share-outline" class="share-icon" (click)="shareItem()"></ion-icon>
   </div>
 
   <!-- Botón adicional -->
