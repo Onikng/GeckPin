@@ -22,15 +22,15 @@
   </div>
 
   <!-- Título -->
-  <h1 *ngIf="selectedItem?.title" class="title">{{ selectedItem?.title || 'Sin título disponible' }}</h1>
+  <h1 *ngIf="selectedItem?.descripcion" class="title">{{ selectedItem?.descripcion || 'Sin título disponible' }}</h1>
 
   
 
   <!-- Contenedor para la información del usuario -->
   <div class="user-container">
     <div class="user-info">
-      <p *ngIf="selectedItem?.user?.name"  class="username">{{ selectedItem?.user.name }}</p>
-      <p *ngIf="selectedItem?.description" class="description">{{ selectedItem?.description || 'Sin descripción disponible' }}</p>
+      
+      <p *ngIf="selectedItem?.description" class="description">{{ selectedItem?.descripcion || 'Sin descripción disponible' }}</p>
     </div>
   </div>
 
