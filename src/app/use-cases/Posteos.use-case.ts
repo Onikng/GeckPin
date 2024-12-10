@@ -1,36 +1,48 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { getAuth } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PosteosUseCase {
-
-  constructor(
-    private firestore: AngularFirestore,
-  ) {}
+  constructor(private firestore: AngularFirestore) {}
 
   async performPostRegistration(
-    PhotoURL: string,
+    PhotoURL: string | null,
     descripcion: string
   ): Promise<{ success: boolean; message: string }> {
     try {
-      if (!PhotoURL || !descripcion.trim()) {
-        throw new Error('Datos incompletos: PhotoURL o descripcion no válidos.');
+      // Validar PhotoURL y descripcion
+      if (!PhotoURL || !/^https?:\/\/.+/.test(PhotoURL)) {
+        throw new Error('PhotoURL no es una URL válida.');
       }
-  
+
+      if (!descripcion || !descripcion.trim()) {
+        throw new Error('Descripción no puede estar vacía.');
+      }
+
+      // Obtener el usuario actual
+      const auth = getAuth();
+      const currentUser = auth.currentUser;
+
+      if (!currentUser) {
+        throw new Error('Usuario no autenticado');
+      }
+
       const postData = {
+        userId: currentUser.uid,
         photoURL: PhotoURL,
         descripcion: descripcion,
         createdAt: new Date().toISOString(), // Timestamp
-        postId: this.firestore.createId()
+        postId: this.firestore.createId(),
       };
-  
+
       console.log('Datos que se intentan guardar en Firestore:', postData);
-  
+
       // Guardar el documento en Firestore
       await this.firestore.collection('Posts').add(postData);
-  
+
       return { success: true, message: 'Post agregado con éxito' };
     } catch (error: any) {
       console.error('Error al guardar en Firestore:', error);
@@ -40,28 +52,4 @@ export class PosteosUseCase {
       };
     }
   }
-  
-  async updatePost(PostId: string, updatedData: any): Promise<{ success: boolean; message: string }> {
-    try {
-    
-      await this.firestore.collection('Posts').doc(PostId).update(updatedData);
-      return { success: true, message: "Post actualizado con éxito" };
-    } catch (error: any) {
-      console.error('Error al actualizar el Post:', error);
-      return { success: false, message: 'Error al actualizar el Post. Por favor, inténtelo de nuevo.' };
-    }
-  }
-
-  async deletePost(PostId: string): Promise<{ success: boolean; message: string }> {
-    try {
-      // eliminar el documento
-      await this.firestore.collection('Posts').doc(PostId).delete();
-      return { success: true, message: 'Post eliminado con éxito' };
-    } catch (error: any) {
-      console.error('Error al eliminar Post:', error);
-      return { success: false, message: 'Error al eliminar Post. Por favor, inténtelo de nuevo.' };
-    }
-  }
-
-
 }

@@ -52,10 +52,6 @@ export class DetailPage implements OnInit {
       this.router.navigate(['/addfile'])
   }
   
-  OnLibraryClick(){
-      this.router.navigate(['/library'])
-  }
-  
   OnProfileClick(){
       this.router.navigate(['/profile'])
   }

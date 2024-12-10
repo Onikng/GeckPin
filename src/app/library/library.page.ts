@@ -1,19 +1,53 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PostManageUseCase } from '../use-cases/Post-manage.use-case';
+
 @Component({
   selector: 'app-library',
   templateUrl: './library.page.html',
   styleUrls: ['./library.page.scss'],
 })
+
 export class LibraryPage implements OnInit {
 
-  constructor(private router:Router) { }
+  posts: any[] = []; 
+
+  constructor(private router:Router, private postManageUseCase: PostManageUseCase) {
+    
+   }
 
   ngOnInit() {
+    this.loadPosts();
+  }
+
+  loadPosts() {
+    this.postManageUseCase.getPosts().subscribe(posts => {
+      this.posts = posts; 
+      console.log('Post obtenidos:', posts); 
+    });
   }
 
   Onbtnreturn(){
     this.router.navigate(['/home'])
+    }
+
+    async deletePosts(postId: string) {
+      try {
+        const response = await this.postManageUseCase.deletePosts(postId);
+        if (response.success) {
+   
+          this.posts = this.posts.filter(post => post.id !== postId);
+          console.log(response.message);
+        } else {
+          console.error(response.message);
+        }
+      } catch (error) {
+        console.error('Error al eliminar el post:', error);
+      }
+    }
+  
+    onEditButtonPressed(postId: string) {
+      this.router.navigate([`/post-edit/${postId}`]); // Pasa el ID en la URL
     }
 
     OnHomeClick(){
@@ -24,28 +58,8 @@ export class LibraryPage implements OnInit {
       this.router.navigate(['/addfile'])
   }
   
-  OnLibraryClick(){
-      this.router.navigate(['/library'])
-  }
-  
   OnProfileClick(){
       this.router.navigate(['/profile'])
   }
 
-    // Función para abrir una biblioteca
-  openLibrary(libraryName: string) {
-    alert(`Abriendo biblioteca: ${libraryName}`);
-    // Aquí puedes usar el router para navegar a una página específica
-    // Por ejemplo: this.router.navigate([`/library/${libraryName}`]);
-  }
-
-  // Función para crear una nueva biblioteca
-  createNewLibrary() {
-    const libraryName = prompt('Ingresa el nombre de la nueva biblioteca:');
-    if (libraryName) {
-      alert(`Nueva biblioteca creada: ${libraryName}`);
-      // Aquí puedes implementar lógica para guardar la nueva biblioteca
-      // como actualizar un array local o llamar a un servicio de backend
-    }
-  }
 }
