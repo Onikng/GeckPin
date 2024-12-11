@@ -15,6 +15,7 @@ export class AddfilePage implements OnInit {
   uid: string = '';
   PhotoURL: string = '';
   descripcion: string = '';
+  postId:string = '';
 
   constructor(
     private postUseCase: PosteosUseCase,
@@ -64,7 +65,8 @@ export class AddfilePage implements OnInit {
       const result = await this.postUseCase.performPostRegistration(
         this.PhotoURL,
         this.descripcion,
-        this.uid
+        this.uid,
+        this.postId
       );
 
       if (result.success) {

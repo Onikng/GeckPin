@@ -110,3 +110,18 @@ ion-toolbar {
     --color: #000000;
     
   }
+
+  ion-buttons ion-button {
+    --padding-start: 8px;
+    --padding-end: 8px;
+    --padding-top: 4px;
+    --padding-bottom: 4px;
+    --border-radius: 4px;
+    font-size: 12px; /* Tamaño de texto reducido */
+    height: 32px; /* Altura más pequeña */
+    line-height: 20px;
+  }
+  
+  ion-buttons {
+    gap: 4px; /* Espaciado entre los botones */
+  }

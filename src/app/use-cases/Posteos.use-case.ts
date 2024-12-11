@@ -10,25 +10,28 @@ export class PosteosUseCase {
   async performPostRegistration(
     PhotoURL: string,
     descripcion: string,
-    uid: string
+    uid: string,
+    postId: string
   ): Promise<{ success: boolean; message: string }> {
     try {
       if (!PhotoURL || !descripcion.trim()) {
         throw new Error('Datos incompletos: PhotoURL o descripcion no válidos.');
       }
 
+      const postId = this.firestore.createId(); // Generar manualmente el ID
+
       const postData = {
         photoURL: PhotoURL,
         descripcion: descripcion,
         createdAt: new Date().toISOString(),
-        postId: this.firestore.createId(),
+        postId: postId,
         uid: uid,
       };
 
       console.log('Datos que se intentan guardar en Firestore:', postData);
 
       // Guardar el documento en Firestore
-      await this.firestore.collection('Posts').add(postData);
+      await this.firestore.collection('Posts').doc(postId).set(postData);
 
       return { success: true, message: 'Post agregado con éxito' };
     } catch (error: any) {
@@ -50,9 +53,9 @@ export class PosteosUseCase {
     }
   }
 
-  async deletePost(PostId: string): Promise<{ success: boolean; message: string }> {
+  async deletePost(postId: string): Promise<{ success: boolean; message: string }> {
     try {
-      await this.firestore.collection('Posts').doc(PostId).delete();
+      await this.firestore.collection('Posts').doc(postId).delete();
       return { success: true, message: 'Post eliminado con éxito' };
     } catch (error: any) {
       console.error('Error al eliminar Post:', error);
