@@ -10,57 +10,60 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="library">
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="ngOnInit()">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <div class="container">
-    <!-- Biblioteca 1 -->
-    <div class="card-library" (click)="openLibrary('Ver más tarde')">
-      <img src="https://via.placeholder.com/150x100?text=Ver+mas+tarde" alt="Ver más tarde">
-      <div class="card-title">Ver más tarde</div>
-    </div>
-    
-    <!-- Biblioteca 2 -->
-    <div class="card-library" (click)="openLibrary('Tu biblioteca')">
-      <img src="https://via.placeholder.com/150x100?text=Tu+biblioteca" alt="Tu biblioteca">
-      <div class="card-title">Tu biblioteca</div>
-    </div>
-    
-    <!-- Biblioteca 3 -->
-    <div class="card-library" (click)="openLibrary('Tus videos favoritos')">
-      <img src="https://via.placeholder.com/150x100?text=Tus+videos+favoritos" alt="Tus videos favoritos">
-      <div class="card-title">Tus videos favoritos</div>
-    </div>
-    
-    <!-- Nueva Biblioteca -->
-    <div class="card add-card" (click)="createNewLibrary()">
-      + Nueva Biblioteca
-    </div>
+  <div *ngIf="isLoading">
+    <ion-spinner></ion-spinner>
+    <p>Cargando...</p>
+  </div>
+
+  <div *ngIf="error">
+    <p>{{ error }}</p>
+  </div>
+
+  <ion-list *ngIf="!isLoading && userPosts.length > 0">
+    <ion-item *ngFor="let post of userPosts">
+      <ion-thumbnail slot="start">
+        <img [src]="post.photoURL" alt="Imagen del post" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ post.descripcion }}</h2>
+        <p>Publicado el {{ post.createdAt | date }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="!isLoading && userPosts.length === 0">
+    <p>No tienes posts para mostrar.</p>
   </div>
 </ion-content>
 
-  <ion-footer>
-    <ion-tab-bar slot="bottom" >
-      <ion-tab-button tab="home" (click)="OnHomeClick()">
-        <ion-icon name="home-outline"></ion-icon>
-        <ion-label>Inicio</ion-label>
-      </ion-tab-button>
-  
-      <ion-tab-button tab="addfile" (click)="OnAddFileClick()">
-        <ion-icon name="add-circle-outline"></ion-icon>
-        <ion-label>Añadir</ion-label>
-      </ion-tab-button>
-  
-      <ion-tab-button tab="library" (click)="OnLibraryClick()">
-        <ion-icon name="library-outline"></ion-icon>
-        <ion-label>Biblioteca</ion-label>
-      </ion-tab-button>
-  
-      <ion-tab-button tab="profile" (click)="OnProfileClick()">
-        <ion-icon name="person-outline"></ion-icon>
-        <ion-label>Perfil</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-footer>
+<ion-footer>
+  <ion-tab-bar slot="bottom" >
+    <ion-tab-button tab="home" (click)="OnHomeClick()">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label>Inicio</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="addfile" (click)="OnAddFileClick()">
+      <ion-icon name="add-circle-outline"></ion-icon>
+      <ion-label>Añadir</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="library" (click)="OnLibraryClick()">
+      <ion-icon name="library-outline"></ion-icon>
+      <ion-label>Biblioteca</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile" (click)="OnProfileClick()">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>Perfil</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-footer>
   
 
 

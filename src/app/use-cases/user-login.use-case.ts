@@ -77,4 +77,12 @@ export class UserLoginUseCase {
       return { success: false, message: errorMessage };
     }
   }
+
+  async getCurrentUserId(): Promise<string> {
+    const user = await this.fireAuth.currentUser;
+    if (!user) {
+      throw new Error('No hay un usuario logeado.');
+    }
+    return user.uid;
+  }
 }

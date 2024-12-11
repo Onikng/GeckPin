@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { PosteosUseCase }  from '../use-cases/Posteos.use-case';
+import { PosteosUseCase } from '../use-cases/Posteos.use-case';
 import { CancelAlertService } from 'src/managers/CancelAlertService';
 import { ImageService } from 'src/managers/image-service';
 import { ActionSheetController } from '@ionic/angular';
-import { UserLoginUseCase } from '../use-cases/user-login.use-case';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-addfile',
@@ -13,66 +12,61 @@ import { UserLoginUseCase } from '../use-cases/user-login.use-case';
   styleUrls: ['./addfile.page.scss'],
 })
 export class AddfilePage implements OnInit {
-
   uid: string = '';
   PhotoURL: string = '';
   descripcion: string = '';
 
-  constructor(  private postUseCase: PosteosUseCase,
-    private navCtrl: NavController, 
+  constructor(
+    private postUseCase: PosteosUseCase,
     private router: Router,
     private alert: CancelAlertService,
     private imageService: ImageService,
     private actionSheetController: ActionSheetController,
-    private userLoginUseCase: UserLoginUseCase,) { }
+    private afAuth: AngularFireAuth
+  ) {}
 
   ngOnInit() {
+    this.loadUserId();
   }
 
-  Onbtnreturn(){
-    this.router.navigate(['/splash'])
+  async loadUserId() {
+    const user = await this.afAuth.currentUser;
+    if (user) {
+      this.uid = user.uid;
+    } else {
+      console.error('No hay un usuario logeado.');
     }
-
-    OnHomeClick(){
-      this.router.navigate(['/home'])
   }
 
-  OnAddFileClick(){
-      this.router.navigate(['/addfile'])
+  Onbtnreturn() {
+    this.router.navigate(['/splash']);
   }
 
-  OnLibraryClick(){
-      this.router.navigate(['/library'])
-  }
+  
 
-  OnProfileClick(){
-      this.router.navigate(['/profile'])
-  }
   async onAddPostButtonPressed() {
     console.log('Datos antes de guardar:', {
       PhotoURL: this.PhotoURL,
       descripcion: this.descripcion,
     });
-  
-    // Validar que los campos necesarios estén llenos
+
     if (!this.PhotoURL) {
       this.alert.showAlert('Error', 'Debes agregar una imagen antes de publicar.', () => {});
-      console.error('PhotoURL inválido:', this.PhotoURL);
       return;
     }
-  
+
     if (!this.descripcion || !this.descripcion.trim()) {
       this.alert.showAlert('Error', 'La descripción no puede estar vacía.', () => {});
-      console.error('Descripción inválida:', this.descripcion);
       return;
     }
-  
+
     try {
       const result = await this.postUseCase.performPostRegistration(
         this.PhotoURL,
-        this.descripcion
+        this.descripcion,
+        this.uid
       );
-  
+
       if (result.success) {
         this.alert.showAlert('Éxito', 'Post agregado exitosamente.', () => {
           this.router.navigate(['/home']);
@@ -86,12 +80,12 @@ export class AddfilePage implements OnInit {
     }
   }
 
-
   clean() {
     this.PhotoURL = '';
     this.descripcion = '';
-    console.log('Formulario limpiado: PhotoURL y descripcion vaciados.');
+    console.log('Formulario limpiado.');
   }
+
   async onAddImagePressed() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Selecciona una opción',
@@ -102,9 +96,9 @@ export class AddfilePage implements OnInit {
           handler: async () => {
             const uploadResult = await this.imageService.getImageFromCamera();
             if (uploadResult.success && uploadResult.imageUrl) {
-              this.PhotoURL = uploadResult.imageUrl; // actualiza el enlace de la imagen
+              this.PhotoURL = uploadResult.imageUrl;
             }
-          }
+          },
         },
         {
           text: 'Imágenes',
@@ -112,7 +106,7 @@ export class AddfilePage implements OnInit {
           handler: async () => {
             const uploadResult = await this.imageService.getImageFromGallery();
             if (uploadResult.success && uploadResult.imageUrl) {
-              this.PhotoURL = uploadResult.imageUrl; // actualiza el enlace de la imagen
+              this.PhotoURL = uploadResult.imageUrl;
             }
           },
         },
@@ -120,10 +114,25 @@ export class AddfilePage implements OnInit {
           text: 'Cancelar',
           icon: 'close',
           role: 'cancel',
-          handler: () => { }
-        }
-      ]
+        },
+      ],
     });
     await actionSheet.present();
   }
+  OnHomeClick(){
+    this.router.navigate(['/home'])
+}
+
+OnAddFileClick(){
+    this.router.navigate(['/addfile'])
+}
+
+OnLibraryClick(){
+    this.router.navigate(['/library'])
+}
+
+OnProfileClick(){
+    this.router.navigate(['/profile'])
+}
+
 }

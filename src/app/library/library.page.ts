@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PosteosUseCase } from '../use-cases/Posteos.use-case';
+import { UserLoginUseCase } from '../use-cases/user-login.use-case';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-library',
@@ -6,46 +8,44 @@ import { Router } from '@angular/router';
   styleUrls: ['./library.page.scss'],
 })
 export class LibraryPage implements OnInit {
+  uid: string = '';
+  userPosts: any[] = [];
+  isLoading: boolean = true;
+  error: string = '';
 
-  constructor(private router:Router) { }
+  constructor(
+    private postUseCase: PosteosUseCase,
+    private userLoginUseCase: UserLoginUseCase,
+    private router:Router
+  ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    try {
+      this.uid = await this.userLoginUseCase.getCurrentUserId(); // Obtener el ID del usuario logeado
+      this.userPosts = await this.postUseCase.getUserPosts(this.uid); // Obtener los posts
+    } catch (err) {
+      console.error(err);
+      this.error = 'No se pudieron cargar los posts.';
+    } finally {
+      this.isLoading = false;
+    }
   }
 
-  Onbtnreturn(){
+
+
+  OnHomeClick(){
     this.router.navigate(['/home'])
-    }
+}
 
-    OnHomeClick(){
-      this.router.navigate(['/home'])
-  }
-  
-  OnAddFileClick(){
-      this.router.navigate(['/addfile'])
-  }
-  
-  OnLibraryClick(){
-      this.router.navigate(['/library'])
-  }
-  
-  OnProfileClick(){
-      this.router.navigate(['/profile'])
-  }
+OnAddFileClick(){
+    this.router.navigate(['/addfile'])
+}
 
-    // Función para abrir una biblioteca
-  openLibrary(libraryName: string) {
-    alert(`Abriendo biblioteca: ${libraryName}`);
-    // Aquí puedes usar el router para navegar a una página específica
-    // Por ejemplo: this.router.navigate([`/library/${libraryName}`]);
-  }
+OnLibraryClick(){
+    this.router.navigate(['/library'])
+}
 
-  // Función para crear una nueva biblioteca
-  createNewLibrary() {
-    const libraryName = prompt('Ingresa el nombre de la nueva biblioteca:');
-    if (libraryName) {
-      alert(`Nueva biblioteca creada: ${libraryName}`);
-      // Aquí puedes implementar lógica para guardar la nueva biblioteca
-      // como actualizar un array local o llamar a un servicio de backend
-    }
-  }
+OnProfileClick(){
+    this.router.navigate(['/profile'])
+}
 }

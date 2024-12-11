@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserLoginUseCase } from '../use-cases/user-login.use-case';
 import { CancelAlertService } from 'src/managers/CancelAlertService';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 //Importación StorageService
 import { StorageService } from 'src/managers/StorageService';
@@ -14,8 +15,9 @@ import { StorageService } from 'src/managers/StorageService';
 })
 export class LoginPage implements OnInit {
 //Creación Instanacia StorageService
-  constructor(private router: Router, private storageService: StorageService,private userLoginUseCase: UserLoginUseCase, private alert: CancelAlertService) { }
+  constructor(private router: Router, private storageService: StorageService,private userLoginUseCase: UserLoginUseCase, private alert: CancelAlertService,private afAuth: AngularFireAuth ) { }
 
+  uid: string = '';
   email: string = '';
   password: string= '';
 
@@ -26,6 +28,7 @@ export class LoginPage implements OnInit {
     this.router.navigate(['/splash'])
     }
 
+    
     async onLoginButtonPressed() {
       const result = await this.userLoginUseCase.performLogin(this.email, this.password);
   
